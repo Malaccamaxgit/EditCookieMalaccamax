@@ -1,29 +1,32 @@
 # Edit Cookie Malaccamax
 
-Cookie editor extension for Chrome. Built with Rust and WebAssembly.
+> **Cookie editor for Chrome** — View, create, edit, delete, protect, and export browser cookies with a fast Rust/WebAssembly-powered interface.
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: GPL v3+](https://img.shields.io/badge/License-GPL--3.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Language: Rust](https://img.shields.io/badge/Language-Rust-orange.svg)](https://www.rust-lang.org/)
 [![Version](https://img.shields.io/github/package-json/v/Malaccamaxgit/EditCookieMalaccamax?color=blue)](https://github.com/Malaccamaxgit/EditCookieMalaccamax)
 [![Target: MV3](https://img.shields.io/badge/Target-Manifest%20V3-blue)](https://developer.chrome.com/docs/extensions/mv3/intro/)
+[![Tests](https://img.shields.io/badge/Tests-29%20passing-brightgreen)](https://github.com/Malaccamaxgit/EditCookieMalaccamax)
 
 ---
 
 ## Features
 
-- Create, read, update, and delete cookies
-- Protect cookies from modification (read-only with auto-restore)
-- Built-in descriptions for 100+ well-known cookies (Google, Meta, Cloudflare, etc.)
-- User-editable cookie descriptions that persist across sessions
-- Visual badges for Secure, HttpOnly, and expiration status
-- Export cookies as JSON, Netscape format, or semicolon pairs
-- Filter cookies by domain/name patterns
-- Dark and light theme support
-- Search and sort cookies
-- Context menu integration
-- Duplicate cookies with one click
-- DevTools panel for full cookie table view
-- Playwright end-to-end test suite
+- **Cookie CRUD** — Create, read, update, and delete cookies with full field control
+- **Cookie Protection** — Mark cookies as read-only with automatic restoration on modification
+- **Search & Filter** — Real-time search by name/domain, plus toggle filters for host-only, domain, Secure, HttpOnly, session, and persistent cookies
+- **Cookie Count** — Live count of visible cookies, reflecting active search and filters
+- **Scope Badges** — Visual indicators showing whether a cookie is host-only or domain-scoped
+- **Security Badges** — Secure (lock), HttpOnly (shield), and expiration status at a glance
+- **Export to File** — Save cookies via native Save As dialog (JSON, Netscape, or semicolon pairs)
+- **Copy to Clipboard** — One-click copy in your preferred format
+- **Built-in Descriptions** — 100+ well-known cookies identified (Google, Meta, Cloudflare, HubSpot, Stripe, AWS, etc.)
+- **Custom Descriptions** — Add your own notes to any cookie, persisted across sessions
+- **Duplicate Cookies** — Clone a cookie with one click
+- **Dark & Light Themes** — System-aware theming with manual override
+- **Context Menu** — Right-click to edit cookies for the current site
+- **DevTools Panel** — Full cookie table view in Chrome DevTools
+- **Open Source** — Built with Rust and WebAssembly; inspect every line of code
 
 ---
 
@@ -43,6 +46,9 @@ Cookie editor extension for Chrome. Built with Rust and WebAssembly.
 # Clone repository
 git clone https://github.com/Malaccamaxgit/EditCookieMalaccamax.git
 cd EditCookieMalaccamax
+
+# Install npm dependencies (for Playwright tests)
+npm install
 
 # Add WASM target
 rustup target add wasm32-unknown-unknown
@@ -64,7 +70,7 @@ Click the extension icon to view and edit cookies for the current site.
 
 Each cookie row displays:
 - **Name** and **description** (from built-in dictionary or user-defined)
-- **Badges** — Secure (lock icon), HttpOnly (shield icon), Expiration (clock + relative time)
+- **Badges** — Scope (host/domain), Secure (lock), HttpOnly (shield), Expiration (clock + relative time)
 - **Domain** (toggleable in settings)
 
 ### Cookie Actions
@@ -152,17 +158,17 @@ Click the gear icon to open settings.
 ```
 src/
 ├── lib.rs                  # Entry point, extension definition
-├── chrome_api.rs           # Chrome API bindings (cookies, tabs, storage, etc.)
+├── chrome_api.rs           # Chrome API bindings (cookies, tabs, storage, downloads)
 ├── background/
 │   ├── mod.rs              # Service worker setup
 │   ├── cookie_monitor.rs   # onChanged listener, auto-restore, RAII guards
 │   ├── context_menus.rs    # Right-click menu
 │   └── devtools.rs         # DevTools panel registration
 ├── popup/
-│   ├── mod.rs              # Main popup UI, theme, settings modal
+│   ├── mod.rs              # Main popup UI, theme, settings modal, filter logic
 │   ├── cookie_list.rs      # Cookie list, detail view, actions, descriptions
 │   ├── cookie_editor.rs    # Standalone editor form (reserved)
-│   └── search.rs           # Search bar component
+│   └── search.rs           # Search bar, filter toggles, cookie count
 ├── options/
 │   ├── mod.rs              # Options page
 │   └── preferences.rs      # Settings form
@@ -180,11 +186,7 @@ src/
 public/
 ├── popup.html              # Popup shell
 ├── options.html            # Options shell
-├── css/
-│   ├── popup.css           # Popup styles (light + dark theme)
-│   ├── options.css         # Options styles
-│   ├── devtools.css        # DevTools panel styles
-│   └── fontawesome.min.css # Font Awesome 6.4.0 (bundled locally)
+├── css/                    # Stylesheets (popup, options, devtools, Font Awesome)
 ├── webfonts/               # Font Awesome webfont files (woff2 + ttf)
 ├── devtools/               # DevTools HTML pages
 ├── js/                     # DevTools page loader
@@ -192,10 +194,11 @@ public/
 
 scripts/
 ├── Build-Extension.ps1     # Build + post-build asset copy
-└── Verify-Build.ps1        # Automated build verification
+├── Verify-Build.ps1        # Automated build verification
+└── secret-scanner.js       # Pre-commit secret detection
 
 tests/
-├── extension.spec.js       # Playwright E2E test suite (14 tests)
+├── extension.spec.js       # Playwright E2E test suite (29 tests)
 └── fixtures.js             # Playwright shared fixtures
 ```
 
@@ -209,13 +212,7 @@ tests/
 npx playwright test
 ```
 
-The test suite covers popup rendering, cookie CRUD, search/filter, theme toggle, settings modal, all action buttons (save, delete, lock, copy, duplicate), description editor, and badges.
-
-### Unit Tests
-
-```powershell
-cargo test
-```
+The test suite (29 tests) covers popup rendering, cookie CRUD, search/filter, theme toggle, settings modal, all action buttons (save, delete, lock, copy, duplicate), description editor, and badges.
 
 ### Linting
 
@@ -227,30 +224,33 @@ cargo clippy --target wasm32-unknown-unknown -- -D warnings
 
 ## Documentation
 
-### Users
-
-- [README.md](./README.md) — Features, installation, usage
-- [PRIVACY.md](./PRIVACY.md) — Privacy policy
+- [PRIVACY.md](./PRIVACY.md) — Privacy policy (no data collection)
 - [CHANGELOG.md](./CHANGELOG.md) — Version history
-
-### Developers
-
-- [docs/guides/DEVELOPER.md](./docs/guides/DEVELOPER.md) — Build, test, and verification procedures
-- [docs/guides/CLAUDE.md](./docs/guides/CLAUDE.md) — Quick reference for AI assistants
-- [docs/architecture/OVERVIEW.md](./docs/architecture/OVERVIEW.md) — Architecture overview
 - [SECURITY.md](./SECURITY.md) — Security policy and vulnerability reporting
 - [CONTRIBUTING.md](./CONTRIBUTING.md) — Contribution guidelines
+- [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) — Community standards
+- [docs/guides/DEVELOPER.md](./docs/guides/DEVELOPER.md) — Build, test, and verification procedures
+- [docs/architecture/OVERVIEW.md](./docs/architecture/OVERVIEW.md) — Architecture overview
 
-### Scripts
+---
 
-- [scripts/Build-Extension.ps1](./scripts/Build-Extension.ps1) — Build + post-build asset copy
-- [scripts/Verify-Build.ps1](./scripts/Verify-Build.ps1) — Automated build verification
+## Tech Stack
+
+| Category | Technology |
+|----------|-----------|
+| **Language** | Rust (2024 edition) |
+| **WASM Toolchain** | wasm-bindgen, wasm-bindgen-futures |
+| **UI Framework** | Leptos 0.8 (CSR) |
+| **Browser APIs** | web-sys, js-sys |
+| **Build Tool** | Oxichrome |
+| **Test Runner** | Playwright (29 tests) |
+| **Target** | Chrome Manifest V3 |
 
 ---
 
 ## License
 
-GNU General Public License v3.0 — see [LICENSE](./LICENSE) for details.
+GNU General Public License v3.0 or later — see [LICENSE](./LICENSE) for details.
 
 ---
 
