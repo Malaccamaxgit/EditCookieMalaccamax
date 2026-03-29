@@ -75,10 +75,33 @@ jobs:
         echo "Running cargo clippy..."
         cargo clippy --target wasm32-unknown-unknown -- -D warnings
 
+    - name: Install Oxichrome
+      run: cargo install oxichrome --locked
+
     - name: Build extension
       run: |
         echo "Building extension..."
-        cargo build --target wasm32-unknown-unknown --release
+        cargo oxichrome build --release
+
+        # Post-build asset copy (mirrors scripts/Build-Extension.ps1)
+        DIST="dist/chromium"
+        cp public/css/popup.css public/css/options.css public/css/devtools.css public/css/fontawesome.min.css "$DIST/css/"
+        cp -r public/webfonts "$DIST/"
+        cp -r public/icons "$DIST/"
+        cp public/devtools/panel.html "$DIST/devtools/panel.html"
+        mkdir -p "$DIST/js"
+        cp public/js/devtools-page.js "$DIST/js/devtools-page.js"
+
+        # Patch manifest: add host_permissions, icons, remove web_accessible_resources
+        python3 -c "
+        import json, sys
+        m = json.load(open('$DIST/manifest.json'))
+        m.pop('web_accessible_resources', None)
+        m.setdefault('host_permissions', ['<all_urls>'])
+        m.setdefault('icons', {'16':'icons/icon-16.png','19':'icons/icon-19.png','32':'icons/icon-32.png','38':'icons/icon-38.png','48':'icons/icon-48.png','128':'icons/icon-128.png'})
+        m.get('action',{}).setdefault('default_icon', {'16':'icons/icon-16.png','32':'icons/icon-32.png','48':'icons/icon-48.png'})
+        json.dump(m, open('$DIST/manifest.json','w'), indent=2)
+        "
 
     - name: Install Playwright browsers
       run: npx playwright install --with-deps chromium
@@ -86,7 +109,7 @@ jobs:
     - name: Run Playwright tests
       run: |
         echo "Running Playwright tests..."
-        npx playwright test
+        xvfb-run --auto-servernum npx playwright test
 
     - name: Security summary
       if: success()
