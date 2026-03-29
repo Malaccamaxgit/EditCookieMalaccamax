@@ -1,0 +1,19 @@
+# Site Settings
+title: EditCookieMalaccamax
+description: "Edit, delete, protect, and export browser cookies. A Chrome extension built with Rust and WebAssembly."
+url: "https://malaccamaxgit.github.io"
+baseurl: "/EditCookieMalaccamax"
+repository: Malaccamaxgit/EditCookieMalaccamax
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Sitemaps specific setting
+defaults:
+  - scope:
+      path: ""
+    values:
+      changefreq: "monthly"
+      priority: "0.5"
