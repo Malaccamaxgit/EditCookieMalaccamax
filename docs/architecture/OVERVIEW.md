@@ -1,6 +1,6 @@
 # Architecture Overview
 
-> **Purpose** — High-level architecture documentation for **Edit Cookie Malaccamax** v0.1.6.
+> **Purpose** — High-level architecture documentation for **Edit Cookie Malaccamax** v0.2.0.
 
 | Topic | Detail |
 |--------|--------|

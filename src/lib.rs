@@ -20,7 +20,7 @@ mod shared;
 
 #[oxichrome::extension(
     name = "Edit Cookie",
-    version = "0.1.6",
+    version = "0.2.0",
     description = "Edit, delete, protect, and export browser cookies. Manage values, expiration, and security flags with ease.",
     permissions = [
         "cookies",

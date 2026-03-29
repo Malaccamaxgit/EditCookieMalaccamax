@@ -1,6 +1,6 @@
 # Developer Handbook — Edit Cookie Malaccamax
 
-> **Purpose** — Build, test, verify, and navigate the codebase for **Edit Cookie Malaccamax** (v0.1.6).
+> **Purpose** — Build, test, verify, and navigate the codebase for **Edit Cookie Malaccamax** (v0.2.0).
 
 This handbook describes how to set up the environment, produce a loadable Chromium extension, run tests, and follow project conventions.
 
@@ -258,7 +258,7 @@ src/
     └── mod.rs              # DevTools panel UI
 ```
 
-### Features (v0.1.6)
+### Features (v0.2.0)
 
 - Cookie CRUD
 - Protected cookies (read-only with auto-restore in the background worker)
