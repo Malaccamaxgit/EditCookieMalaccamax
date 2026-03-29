@@ -2,7 +2,7 @@
 name = "edit-cookie-malaccamax"
 version = "0.1.6"
 edition = "2024"
-license = "GPL-3.0-only"
+license = "GPL-3.0-or-later"
 
 [lib]
 crate-type = ["cdylib"]
