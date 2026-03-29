@@ -85,11 +85,11 @@ jobs:
 
         # Post-build asset copy (mirrors scripts/Build-Extension.ps1)
         DIST="dist/chromium"
+        mkdir -p "$DIST/css" "$DIST/webfonts" "$DIST/icons" "$DIST/devtools" "$DIST/js"
         cp public/css/popup.css public/css/options.css public/css/devtools.css public/css/fontawesome.min.css "$DIST/css/"
-        cp -r public/webfonts "$DIST/"
-        cp -r public/icons "$DIST/"
+        cp -r public/webfonts/* "$DIST/webfonts/"
+        cp -r public/icons/* "$DIST/icons/"
         cp public/devtools/panel.html "$DIST/devtools/panel.html"
-        mkdir -p "$DIST/js"
         cp public/js/devtools-page.js "$DIST/js/devtools-page.js"
 
         # Patch manifest: add host_permissions, icons, remove web_accessible_resources
