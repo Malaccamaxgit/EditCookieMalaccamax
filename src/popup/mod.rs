@@ -28,7 +28,7 @@ fn scroll_list_to_top() {
 
 fn request_animation_frame(f: fn()) {
     use wasm_bindgen::prelude::*;
-    let cb = Closure::once_into_js(move || f());
+    let cb = Closure::once_into_js(f);
     if let Some(w) = web_sys::window() {
         let _ = w.request_animation_frame(cb.unchecked_ref());
     }

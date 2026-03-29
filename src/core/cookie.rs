@@ -59,14 +59,14 @@ fn validate_cookie_fields(cookie: &Cookie) -> Result<(), JsValue> {
             MAX_COOKIE_DOMAIN_LEN
         )));
     }
-    if let Some(ref path) = cookie.path {
-        if path.len() > MAX_COOKIE_PATH_LEN {
-            return Err(JsValue::from_str(&format!(
-                "Cookie path too long ({} chars, max {})",
-                path.len(),
-                MAX_COOKIE_PATH_LEN
-            )));
-        }
+    if let Some(ref path) = cookie.path
+        && path.len() > MAX_COOKIE_PATH_LEN
+    {
+        return Err(JsValue::from_str(&format!(
+            "Cookie path too long ({} chars, max {})",
+            path.len(),
+            MAX_COOKIE_PATH_LEN
+        )));
     }
     Ok(())
 }

@@ -72,14 +72,14 @@ pub async fn add_filter(
             MAX_PATTERN_LEN
         )));
     }
-    if let Some(ref np) = name_pattern {
-        if np.len() > MAX_PATTERN_LEN {
-            return Err(JsValue::from_str(&format!(
-                "Name pattern too long ({} chars, max {})",
-                np.len(),
-                MAX_PATTERN_LEN
-            )));
-        }
+    if let Some(ref np) = name_pattern
+        && np.len() > MAX_PATTERN_LEN
+    {
+        return Err(JsValue::from_str(&format!(
+            "Name pattern too long ({} chars, max {})",
+            np.len(),
+            MAX_PATTERN_LEN
+        )));
     }
 
     let mut filters = DataStorage::get_filters().await;
