@@ -75,8 +75,8 @@ jobs:
         echo "Running cargo clippy..."
         cargo clippy --target wasm32-unknown-unknown -- -D warnings
 
-    - name: Install Oxichrome
-      run: cargo install oxichrome --locked
+    - name: Install Oxichrome CLI
+      run: cargo install cargo-oxichrome --locked
 
     - name: Build extension
       run: |
