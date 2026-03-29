@@ -1,0 +1,33 @@
+# 1. Default: Auto-detect text files and normalize to LF in the repo
+* text=auto
+
+# 2. Source Code: Ensure LF for all code files
+*.rs    text eol=lf
+*.js    text eol=lf
+*.ts    text eol=lf
+*.json  text eol=lf
+*.html  text eol=lf
+*.css   text eol=lf
+*.toml  text eol=lf
+
+# 3. Windows Specific: Force CRLF for Batch/PowerShell files
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+*.ps1   text eol=crlf
+
+# 4. Linux Specific: Force LF for Shell scripts
+*.sh    text eol=lf
+
+# 5. Binaries: Do NOT touch these
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.wasm  binary
+
+# 6. Documentation
+*.md    text eol=lf
+LICENSE text eol=lf

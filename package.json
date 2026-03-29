@@ -1,0 +1,17 @@
+{
+  "name": "editcookiemalaccamax",
+  "version": "1.0.0",
+  "description": "",
+  "main": "debug-extension.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-3.0-only",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}

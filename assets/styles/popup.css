@@ -1,0 +1,386 @@
+/* Popup Styles */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ededed;
+    width: 550px;
+    min-height: 400px;
+    max-height: 600px;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.7em;
+}
+
+.app-container {
+    width: 100%;
+    padding: 0 0 40px 0;
+}
+
+/* Search Box */
+#searchBox {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #ededed;
+    padding: 5px 10px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    gap: 5px;
+}
+
+#cookieSearchCondition {
+    flex: 1;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 1em;
+}
+
+#searchBtn {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #f5f5f5;
+    cursor: pointer;
+}
+
+#searchBtn:hover {
+    background: #e5e5e5;
+}
+
+/* Commands Bar */
+.commands-table {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #525252;
+    background: #f5f5f5;
+}
+
+.commands-row {
+    display: flex;
+    width: 100%;
+}
+
+.commands-row > a {
+    flex: 1;
+    text-align: center;
+    padding: 10px 5px;
+    border-right: 1px solid #a1a1a1;
+    cursor: pointer;
+    text-decoration: none;
+    color: #363636;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.commands-row > a:last-child {
+    border-right: none;
+}
+
+.commands-row > a:hover {
+    background: #e5e5e5;
+}
+
+.commands-row a i {
+    font-size: 1.8em;
+    margin-bottom: 2px;
+}
+
+.commands-row a span {
+    font-size: 0.7em;
+    display: none;
+}
+
+.commands-row.show-labels a span {
+    display: block;
+}
+
+/* Cookie List */
+#cookiesList {
+    padding: 10px;
+}
+
+.cookie-row {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.cookie-header {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    cursor: pointer;
+    background: #f9f9f9;
+}
+
+.cookie-header:hover {
+    background: #f0f0f0;
+}
+
+.cookie-name {
+    font-weight: bold;
+    flex: 1;
+}
+
+.cookie-domain {
+    color: #666;
+    font-size: 0.9em;
+    margin: 0 10px;
+}
+
+.cookie-header i {
+    color: #666;
+}
+
+.cookie-details {
+    padding: 10px;
+    background: #fff;
+    border-top: 1px solid #ccc;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 10px;
+}
+
+.detail-row label {
+    min-width: 80px;
+    font-weight: bold;
+}
+
+.detail-row input[type="text"] {
+    flex: 1;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.detail-row textarea {
+    flex: 1;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    min-height: 60px;
+    resize: vertical;
+}
+
+.detail-row input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.cookie-actions {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+    justify-content: flex-end;
+}
+
+.action-btn {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #f5f5f5;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background: #e5e5e5;
+}
+
+/* New Cookie Form */
+#newCookie {
+    display: none;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin: 10px;
+}
+
+#newCookie.visible {
+    display: block;
+}
+
+.form-row {
+    margin-bottom: 10px;
+}
+
+.form-row label {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+.form-row input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.form-row textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    min-height: 80px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.btn-primary {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #45a049;
+}
+
+.btn-secondary {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+}
+
+.btn-secondary:hover {
+    background: #e5e5e5;
+}
+
+/* No Cookies Message */
+#noCookies {
+    text-align: center;
+    padding: 50px 20px;
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #666;
+}
+
+#noCookies i {
+    font-size: 3em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Loader */
+.loader-container {
+    text-align: center;
+    padding: 50px;
+}
+
+.loader-container i {
+    font-size: 2em;
+    color: #666;
+}
+
+/* Submit Button Bar */
+#submitDiv {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ededed;
+    border-top: 1px solid #525252;
+    padding: 10px;
+    text-align: center;
+}
+
+#submitButton {
+    font-size: 1.2em;
+    color: #008000;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#submitButton:hover {
+    color: #009300;
+}
+
+/* Toast Notification */
+.toast {
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4d4d4d;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 4000;
+}
+
+/* Alert Dialog */
+#alert_wrapper {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+}
+
+#alert_box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #222;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    min-width: 300px;
+    text-align: center;
+}
+
+#alert_buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.alert_button {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #c7c7c7;
+    background: #444;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.alert_button:hover {
+    background: #2a2a2a;
+}
+
+/* Icons */
+.fa {
+    width: 20px;
+    text-align: center;
+}

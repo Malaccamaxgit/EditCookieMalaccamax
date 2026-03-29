@@ -1,0 +1,111 @@
+# Rust build artifacts
+/target
+Cargo.lock
+
+# WASM output (built from source)
+*.wasm
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+
+# Extension packaging
+*.crx
+*.pem
+*.zip
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# IDE - JetBrains
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# IDE - Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# IDE - Cursor / Copilot / AI
+.cursor/
+.copilot/
+.ai/
+*.ai.md
+.claude/
+CLAUDE.md
+docs/guides/CLAUDE.md
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# MacOS
+.AppleDouble
+.LSOverride
+Icon
+
+# Test artifacts
+test-profile/
+test-user-data/
+test-results/
+playwright-report/
+coverage/
+.nyc_output/
+*.lcov
+
+# Development-only scripts and screenshots (not part of the project)
+quick-test.js
+test-cookies.js
+test-extension.js
+test-popup.js
+test-simple.js
+debug-popup.js
+launch-and-test.js
+extensions-page.png
+extensions-screenshot.png
+toolbar-screenshot.png
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.cache/
+
+# Local history
+.history/
+
+# Editor directories
+.fleet/
