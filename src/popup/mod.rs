@@ -240,16 +240,16 @@ fn CookieListWithSearch(preferences: ReadSignal<Preferences>) -> impl IntoView {
             .filter(|c| {
                 // Scope pair: host-only vs domain
                 match (f.host_only, f.domain) {
-                    (true, false) => { if c.domain.starts_with('.') { return false; } }
-                    (false, true) => { if !c.domain.starts_with('.') { return false; } }
+                    (true, false) if c.domain.starts_with('.') => { return false; }
+                    (false, true) if !c.domain.starts_with('.') => { return false; }
                     _ => {}
                 }
                 if f.secure && !c.secure { return false; }
                 if f.http_only && !c.http_only { return false; }
                 // Expiry pair: session vs persistent
                 match (f.session, f.persistent) {
-                    (true, false) => { if c.expiration_date.is_some() { return false; } }
-                    (false, true) => { if c.expiration_date.is_none() { return false; } }
+                    (true, false) if c.expiration_date.is_some() => { return false; }
+                    (false, true) if c.expiration_date.is_none() => { return false; }
                     _ => {}
                 }
                 true
