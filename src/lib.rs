@@ -26,7 +26,6 @@ mod shared;
         "cookies",
         "contextMenus",
         "storage",
-        "clipboardWrite",
         "downloads"
     ]
 )]
